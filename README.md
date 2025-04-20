@@ -1,4 +1,29 @@
-# EOS - EspOperationSystem
+# EOS Framework – Skeleton 0.1
+
+Professional starting point for a DSL‑driven IoT framework that targets
+ESP8266 but can be unit‑tested on the host.  Key features:
+
+* 📄 **DSL** (`*.eos`) for declaring peripherals, shared variables,
+  services, events, periodic tasks and board‑level wiring.
+* ⚙️ **Core runtime** (`eos_core`) – extremely small, header‑only façade
+  with static tables; no dynamic allocation, no RTTI.
+* 🛠 **prebuild.py** – stub script that will parse DSL files and emit
+  `eos_gen_*.cpp` before compilation.
+* 🚀 Works with **PlatformIO** for firmware and **CMake** for host tests.
+
+## Build (host)
+```bash
+mkdir build && cd build
+cmake .. && cmake --build .
+./host_tests
+```
+
+## Build (ESP8266)
+```bash
+pio run -t upload
+```
+
+<!-- # EOS - EspOperationSystem
 
 ## Descripción
 
@@ -31,4 +56,4 @@ Para comenzar a trabajar con **EOS-EspOperationSystem**, necesitarás tener **Pl
    ```bash
    git clone https://github.com/<tu_usuario>/EOS-EspOperationSystem.git
    cd EOS-EspOperationSystem
-  ```
+  ``` -->

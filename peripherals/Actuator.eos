@@ -1,0 +1,7 @@
+// peripheral Actuator {
+//     pin pin;
+//     id  string;
+
+//     Service void turnOn()  { digitalWrite(pin, HIGH); }
+//     Service void turnOff() { digitalWrite(pin, LOW);  }
+// }
