@@ -1,0 +1,12 @@
+{
+  "name": "eos-framework",
+  "version": "1.0.0",
+  "description": "Embedded EOS framework con DSL y Clang‑plugin de generación de código",
+  "keywords": ["eos", "embedded", "dsl", "clang-plugin"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tuOrg/eos-framework.git"
+  },
+  "frameworks": ["arduino"],
+  "platforms": ["espressif32"]
+}

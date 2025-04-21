@@ -1,26 +1,32 @@
-#!/usr/bin/env python3
-"""Pre‑build hook: scan *.eos, emit C++ glue, fail CI on syntax errors.
+Import("env")
+import os, subprocess, sys
 
-Usage (PlatformIO): executed automatically via platformio.ini.
-"""
-import pathlib, sys, re, textwrap
-PROJECT_ROOT = pathlib.Path(__file__).resolve().parents[1]
-GEN_DIR = PROJECT_ROOT / "src" / "generated"
-GEN_DIR.mkdir(exist_ok=True)
+# Determina rutas
+project_dir = env['PROJECT_DIR']
+lib_dir     = os.path.join(project_dir, "lib", "eos-framework", "plugin")
+build_dir   = os.path.join(lib_dir, "build")
+so_name     = "EOSPlugin.dll" if sys.platform == "win32" else "libEOSPlugin.so"
+so_path     = os.path.join(build_dir, so_name)
 
-# TODO: Replace with real lexer/parser (PEG / Flex + Bison binding).
-HEADER = textwrap.dedent("""
-    // \u26A1 AUTO‑GENERATED – DO NOT EDIT (prebuild.py)
-    #include "eos_core.hpp"
-""")
+# 1) Compila el plugin si es necesario
+if not os.path.exists(so_path):
+    os.makedirs(build_dir, exist_ok=True)
+    subprocess.check_call(["cmake", "-B", build_dir, "-S", lib_dir])
+    subprocess.check_call(["cmake", "--build", build_dir])
 
-def stub_emit():
-    (GEN_DIR / "eos_stub.cpp").write_text(HEADER)
-    print("[prebuild] stub glue generated → eos_stub.cpp")
+# 2) Genera los headers con clang++ + plugin
+src_dir = os.path.join(project_dir, "src")
+out_dir = os.path.join(project_dir, "generated")
+os.makedirs(out_dir, exist_ok=True)
 
-if __name__ == "__main__":
-    try:
-        stub_emit()
-    except Exception as exc:
-        sys.stderr.write(f"prebuild failed: {exc}\n")
-        sys.exit(1)
+for fn in os.listdir(src_dir):
+    if fn.endswith(".hpp"):
+        src = os.path.join(src_dir, fn)
+        subprocess.check_call([
+            "clang++", "-fsyntax-only",
+            "-Xclang", "-load", so_path,
+            "-Xclang", "-plugin=eos-plugin",
+            "-I" + os.path.join(project_dir, "lib", "eos-framework", "include"),
+            "-I" + src_dir,
+            src
+        ])
