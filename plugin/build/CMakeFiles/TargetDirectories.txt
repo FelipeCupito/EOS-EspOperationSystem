@@ -1,0 +1,10 @@
+/Users/felucupito/WorkSpace/EOS-EspOperationSystem/plugin/build/CMakeFiles/intrinsics_gen.dir
+/Users/felucupito/WorkSpace/EOS-EspOperationSystem/plugin/build/CMakeFiles/vt_gen.dir
+/Users/felucupito/WorkSpace/EOS-EspOperationSystem/plugin/build/CMakeFiles/omp_gen.dir
+/Users/felucupito/WorkSpace/EOS-EspOperationSystem/plugin/build/CMakeFiles/acc_gen.dir
+/Users/felucupito/WorkSpace/EOS-EspOperationSystem/plugin/build/CMakeFiles/ARMTargetParserTableGen.dir
+/Users/felucupito/WorkSpace/EOS-EspOperationSystem/plugin/build/CMakeFiles/AArch64TargetParserTableGen.dir
+/Users/felucupito/WorkSpace/EOS-EspOperationSystem/plugin/build/CMakeFiles/RISCVTargetParserTableGen.dir
+/Users/felucupito/WorkSpace/EOS-EspOperationSystem/plugin/build/CMakeFiles/EOSPlugin.dir
+/Users/felucupito/WorkSpace/EOS-EspOperationSystem/plugin/build/CMakeFiles/edit_cache.dir
+/Users/felucupito/WorkSpace/EOS-EspOperationSystem/plugin/build/CMakeFiles/rebuild_cache.dir
